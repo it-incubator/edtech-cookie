@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello IT-INCUBATOR</h1>
+
+<button id="sendRequestToAPI">sendRequest to api</button>
+<button id="createCookieForMyDomainViaServer">create cookie for my domain via server</button>
+<button id="createCookieForMyDomainFromBrowser">create cookie from browser</button>
+
+<div id="cookieContainer"></div>
+<script>
+    cookieContainer.innerHTML = document.cookie;
+
+    sendRequestToAPI.addEventListener("click", async () => {
+        await fetch('/api/app/common')
+    })
+
+    createCookieForMyDomainViaServer.addEventListener("click", async () => {
+       await fetch('api/app/common')
+    })
+
+    createCookieForMyDomainFromBrowser.addEventListener("click", () => {
+        document.cookie = "age=35;max-age=10;"
+        document.cookie = "name=dimych;"
+    })
+</script>
+
+</body>
+</html>

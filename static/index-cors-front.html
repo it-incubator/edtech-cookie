@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>💗IT-INCUBATOR.IO💗</h1>
+
+<button id="sendRequestToAPI">SEND</button>
+<select id="sendRequestToAPIType">
+    <option>get</option>
+    <option>post</option>
+</select> to
+<select id="domains">
+    <option>back.xxx</option>
+    <option>cat.xxx</option>
+</select>
+<br>
+<label>include credentials<input id="includeCredentials" type="checkbox"></label>
+<br>
+<label>include extra headers<input id="includeExtraHeaders" type="checkbox"></label>
+
+<hr>
+
+<script>
+
+    sendRequestToAPI.addEventListener('click', async () => {
+        let config = {
+            method: sendRequestToAPIType.value,
+            headers: {}
+        };
+
+        if (includeCredentials.checked) {
+            config.credentials = 'include';
+        }
+        if (includeExtraHeaders.checked) {
+            config.headers['x-super-token'] = 'some-value';
+        }
+        if (sendRequestToAPIType.value === 'post') {
+            config.body = JSON.stringify({title: 'hello it-incubator'});
+            config.headers = {
+                ...config.headers,
+                'content-type': 'application/json',
+            }
+        }
+        const responseJson = await fetch('https://' + domains.value + '/api/accounts', config);
+        const response = await responseJson.json();
+        console.log(response)
+    })
+
+
+</script>
+
+</body>
+</html>

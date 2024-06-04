@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello IT-INCUBATOR</h1>
+
+<button id="sendRequestToAPI">sendRequest to api</button>
+<select id="domains">
+    <option>api.cat</option>
+    <option>type1.cat</option>
+    <option>type2.cat</option>
+    <option>dog</option>
+</select>
+<hr>
+
+<button id="createCookieForMyDomainViaServer">create cookie for my domain via server</button>
+<select id="domainsCreateCookie">
+    <option>api.cat</option>
+    <option>type1.cat</option>
+    <option>type2.cat</option>
+    <option>dog</option>
+</select>
+<hr>
+<button id="createCookieForMyDomainFromBrowser">create cookie from browser</button>
+<button id="hackerSubdomain">create hackerSubdomain</button>
+<hr>
+<b>Cookies:</b>
+<div id="cookieContainer"></div>
+<script>
+    cookieContainer.innerHTML = document.cookie;
+
+    sendRequestToAPI.addEventListener("click", async () => {
+        await fetch('https://' + domains.value + '.xxx/api/app/common', {
+            credentials: 'include'})
+    })
+
+    createCookieForMyDomainViaServer.addEventListener("click", async () => {
+       await fetch('https://' + domainsCreateCookie.value + '.xxx/api/app/create-cookie', {
+           credentials: 'include'})
+    })
+
+    hackerSubdomain.addEventListener("click", async () => {
+        document.cookie = "all-sub-domain=hack;domain=.cat.xxx;path=/;"
+        document.cookie = "parent-domain=hack;domain=cat.xxx;path=/;"
+    })
+
+    createCookieForMyDomainFromBrowser.addEventListener("click", () => {
+        document.cookie = "age=35;max-age=10;"
+        document.cookie = "name=dimych;"
+        document.cookie = "address=batumi;path=/;"
+        document.cookie = "third-domain=blabal;domain=google.com;path=/;"
+        document.cookie = "all-sub-domain=blabla;domain=.cat.xxx;path=/;"
+        document.cookie = "specified-sub-domain=blabla;domain=type1.cat.xxx;path=/;"
+        document.cookie = "parent-domain=blabla;domain=cat.xxx;path=/;"
+        document.cookie = "other-sub-domain=blabla;domain=type2.cat.xxx;path=/;"
+    })
+</script>
+
+</body>
+</html>
